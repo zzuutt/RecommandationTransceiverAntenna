@@ -1,0 +1,10 @@
+<?php
+
+namespace RecommandationTransceiverAntenna\Model;
+
+use RecommandationTransceiverAntenna\Model\Base\RecommandationtransceiverantennaRecommandationI18n as BaseRecommandationtransceiverantennaRecommandationI18n;
+
+class RecommandationtransceiverantennaRecommandationI18n extends BaseRecommandationtransceiverantennaRecommandationI18n
+{
+
+}

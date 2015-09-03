@@ -1,0 +1,129 @@
+  {$productId = {product attr="id"}}
+  {loop name="transceiver_or_antenna" type="category" product={product attr='id'}}
+    {$typeProduct = ""}
+    {$category_product_recommandation = 0}
+    {if $ID == {config key="Category_Recommandation_Transceiver"}}
+      {$typeProduct = "transceiver"}
+      {$category_product_recommandation = {config key="Category_Recommandation_Antenna"}}
+    {/if}
+    {if $ID == {config key="Category_Recommandation_Antenna"}}
+      {$typeProduct = "antenna"}
+      {$category_product_recommandation = {config key="Category_Recommandation_Transceiver"}}
+    {/if}
+
+    <div class="recommandationtransceiverantenna-module">
+        
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">{intl l="Recommandation Transceiver / Antenna" d='recommandationtransceiverantenna'}</h3>
+        </div>
+        <div class="panel-body">
+    {if {config key="Category_Recommandation_Transceiver"} == 0 || {config key="Category_Recommandation_Antenna"} == 0}
+          <div class="alert alert-info">{intl l="You must first configure recommandationtransceiverantennas to use them." d='recommandationtransceiverantenna'}</div>
+    {else}
+    {if $typeProduct != ""}
+      {form name="recommandationtransceiverantenna.update.product.modification" id=$category_product_recommandation}
+      <form action="{url path="/admin/products/update/{product attr='id'}/recommandationtransceiverantenna"}" method="POST" role="form">
+          <legend>{if $typeProduct == "transceiver"}{intl l="List Antennas unaffected" d='recommandationtransceiverantenna'}{else}{intl l="List Transceiver unaffected" d='recommandationtransceiverantenna'}{/if}</legend>
+          <div class="col-md-8">
+          {form_hidden_fields form=$form}
+      
+          {form_field form=$form field='success_url'}
+          <input type="hidden" name="{$name}" value="{url path="/admin/products/update" product_id={product attr='id'} current_tab='modules'}" />
+          {/form_field}
+
+          {if $form_error}<div class="alert alert-danger">{$form_error_message}</div>{/if}
+          {custom_render_form_field form=$form field="listproduct"}
+          {form_error form=$form field="listproduct"}
+            {$message}
+          {/form_error}
+          <select {form_field_attributes form=$form field='listproduct'}>
+          {$product_count = 0}
+          {loop name="listproduct" type="product" category=$category_product_recommandation }
+            {if $typeProduct == "transceiver"}
+              {if !{transceiver_with_antenna_has_recommandation transceiver_id={product attr='id'} antenna_id=$ID } }
+              <option value="{$ID}">{$TITLE}</option>
+              {$product_count = $product_count + 1}
+              {/if}
+            {else}
+              {if !{transceiver_with_antenna_has_recommandation transceiver_id=$ID antenna_id={product attr='id'} } }
+              <option value="{$ID}">{$TITLE}</option>
+              {$product_count = $product_count + 1}
+              {/if}
+            {/if}
+          {/loop}
+          {if $product_count == 0}
+            <option value="" disabled>{intl l="All the products are associated with a recommendation"}</option>
+          {/if}
+          </select>
+          {/custom_render_form_field}
+          </div>
+          <div class="col-md-4">
+          {form_field form=$form  field="recommandation"}
+          {loop name="recommandation-status" type="recommandationtransceiverantenna_recommandation"}
+            <input type="radio" name="{$name}" id="radiorecommandation{$ID}" class="btn btn-primary" value="{$ID}" {if $ID == '1'}checked = "checked"{/if} {if $product_count == 0}disabled{/if} /><label for="radiorecommandation{$ID}"> {intl l="add to"} '{$TITLE}' {intl l="recommandation"}</label> <br />
+          {/loop}
+          {/form_field}
+          <button type="submit" class="btn btn-primary" {if $product_count == 0}disabled{/if}>{intl l="Save"}</button>
+          </div>
+      </form>
+      {/form}
+      <div style="clear: both"></div>
+      {loop name="recommandation-status" type="recommandationtransceiverantenna_recommandation"}
+      {form name="recommandationtransceiverantenna.delete.product.modification"}
+      <form action="{url path="/admin/products/delete/{product attr='id'}/recommandationtransceiverantenna"}" method="POST" role="form">
+       <legend>{$TITLE}</legend>
+
+       {form_hidden_fields form=$form}
+      
+       {form_field form=$form field='success_url'}
+       <input type="hidden" name="{$name}" value="{url path="/admin/products/update" product_id={product attr='id'} current_tab='modules'}" />
+       {/form_field}
+       {form_field form=$form field='recommandationDelete'}
+       <input type="hidden" name="{$name}" value="{$ID}" />
+       {/form_field}
+
+       {if $form_error}<div class="alert alert-danger">{$form_error_message}</div>{/if}
+        {assign var="IDproduct" value={product attr='id'}}
+
+
+        <div class="col-md-8">
+            <select {form_field_attributes form=$form field='listproductDelete'}>
+              {$product_count = 0}
+              {if $typeProduct == 'antenna'}
+                {loop name="recommandationtransceiverantenna" type="recommandationtransceiverantenna" antenna_id={product attr='id'} recommandation_id={$ID}}
+                    {loop name="searchTitle" type="product" id={$TRANSCEIVER_ID}}
+                    <option value="{$TRANSCEIVER_ID}">{$TITLE}</option>
+                    {/loop}
+                    {$product_count = 1}
+                {/loop}
+              {/if}
+              {if $typeProduct == 'transceiver'}
+                {loop name="recommandationtransceiverantenna" type="recommandationtransceiverantenna" transceiver_id={product attr='id'} recommandation_id={$ID}}
+                    {loop name="searchTitle" type="product" id={$ANTENNA_ID}}
+                    <option value="{$ANTENNA_ID}">{$TITLE}</option>
+                    {/loop}
+                    {$product_count = 1}
+                {/loop}
+              {/if}
+              {if $product_count == 0}
+                <option disabled=disabled>no product</option>
+              {/if}
+
+              </select>
+        </div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-primary" {if $product_count == 0}disabled{/if}>{intl l="delete"}</button>
+        </div>
+
+      </form>
+      {/form}
+      <div style="clear: both; padding: 10px;"></div>
+      {/loop}
+      
+    {/if}
+        </div>
+      </div>
+    </div>
+  {/if}
+  {/loop}

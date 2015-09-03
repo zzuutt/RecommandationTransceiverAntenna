@@ -1,0 +1,10 @@
+<?php
+
+namespace RecommandationTransceiverAntenna\Model;
+
+use RecommandationTransceiverAntenna\Model\Base\RecommandationtransceiverantennaRecommandation as BaseRecommandationtransceiverantennaRecommandation;
+
+class RecommandationtransceiverantennaRecommandation extends BaseRecommandationtransceiverantennaRecommandation
+{
+
+}
