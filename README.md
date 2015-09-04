@@ -28,6 +28,16 @@ __Use the RecommandationTransceiverAntennaRecommandation loop (liste les recomma
 3 extensions smarty:
 
 __Verifier si un produit est associé à une recommandation__
+
+produit de la categorie a t'il une recommandation ?     return: true / false
 ```html
 {transceiver_has_recommandation transceiver_id="id"}
+```
+produit de la categorie a t'il une recommandation ?     return: true / false
+```html
+{antenna_has_recommandationn antenna_id="id"}
+```
+c'est 2 produits ont ils une recommandation ?     return: true / false
+```html
+{transceiver_with_antenna_has_recommandation transceiver_id="id" antenna_id="id"}
 ```
