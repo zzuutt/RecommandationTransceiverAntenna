@@ -11,9 +11,9 @@ le module doit être placé dans le repertoire ```modules/``` (thelia/local/modu
 
 2 boucles sont rajoutées:
 
-__Use the RecommandationTransceiverAntenna loop (liste les produits ayant une recommandation)__
+__Use the recommandationtransceiverantenna loop (liste les produits ayant une recommandation)__
 ```smarty
-{loop name="recommandation" type="RecommandationTransceiverAntenna" transceiver_id="product_id" antenna_id="product_id" recommandation_id="id"}
+{loop name="recommandation" type="recommandationtransceiverantenna" transceiver_id="product_id" antenna_id="product_id" recommandation_id="id"}
     ...
 {/loop}
 ```
@@ -36,9 +36,9 @@ __Use the RecommandationTransceiverAntenna loop (liste les produits ayant une re
 |RECOMMANDATION_ID    | The feature type recommandation_id |
 
 
-__Use the RecommandationTransceiverAntennaRecommandation loop (liste les recommandations)__
+__Use the recommandationtransceiverantenna_recommandation loop (liste les recommandations)__
 ```smarty
-{loop name="recommandation" type="RecommandationTransceiverAntennaRecommandation" id="recommandation_id" code="code"}
+{loop name="recommandation" type="recommandationtransceiverantenna_recommandation" id="recommandation_id" code="code"}
     ...
 {/loop}
 ```
