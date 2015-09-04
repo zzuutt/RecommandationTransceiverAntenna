@@ -17,6 +17,23 @@ __Use the RecommandationTransceiverAntenna loop (liste les produits ayant une re
     ...
 {/loop}
 ```
+#### Input arguments
+
+|Argument |Description |
+|---      |--- |
+|**id**   | A single or a list of ids. |
+|**transceiver_id** | A single id. |
+|**antenna_id** | A single id. |
+|**recommandation_id** | A single id. |
+
+#### Output arguments
+
+|Variable       |Description |
+|---            |--- |
+|ID            | The feature type id |
+|TRANSCEIVER_ID     | The feature type transceiver_id |
+|ANTENNA_ID    | The feature type antenna_id |
+|RECOMMANDATION_ID    | The feature type recommandation_id |
 
 __Use the RecommandationTransceiverAntennaRecommandation loop (liste les recommandations)__
 ```html
