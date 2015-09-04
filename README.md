@@ -1,5 +1,5 @@
 # RecommandationTransceiverAntenna
-##for Thelia 2
+##pour Thelia 2
 
 Ce module vous permet d'ajouter des recommandations à des categories de produit par rapport a d'autres categories
 
