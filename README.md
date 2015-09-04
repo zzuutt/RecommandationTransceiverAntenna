@@ -29,5 +29,5 @@ __Use the RecommandationTransceiverAntennaRecommandation loop (liste les recomma
 
 __Verifier si un produit est associé à une recommandation__
 ```html
-
+{transceiver_has_recommandation transceiver_id="id"}
 ```
