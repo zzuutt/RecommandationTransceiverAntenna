@@ -100,7 +100,7 @@ class ProductModificationFormUpdate extends BaseForm
         
 
         foreach($list_recommandationTransceiverAntenna as $display_product) {
-          if($category_product == $category_transceiver) {
+          if(in_array($category_product, $list_category_transceiver)) {
             $array_recommandationTransceiverAntenna[] = $display_product->getAntennaId();
           }
           else {

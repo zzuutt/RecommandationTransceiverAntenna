@@ -25,7 +25,7 @@ use Thelia\Tools\URL;
 use Thelia\Log\Tlog;
 
 /**
- * Class UpdateController
+ * UpdateController
  * @author zzuutt <zzuutt34@free.fr>
  */
 class UpdateController extends BaseAdminController

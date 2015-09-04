@@ -53,7 +53,7 @@ class ConfigurationForm extends BaseForm
                 'constraints' => [
                     new NotBlank()
                 ],
-                'label' => Translator::getInstance()->trans('IDs Category transceiver', [], RecommandationTransceiverAntenna::DOMAIN_NAME),
+                'label' => Translator::getInstance()->trans('ID Category transceiver', [], RecommandationTransceiverAntenna::DOMAIN_NAME),
                 'label_attr' => [
                     'for' => 'Category-Recommandation-Transceiver'
                 ],
@@ -63,7 +63,7 @@ class ConfigurationForm extends BaseForm
                 'constraints' => [
                     new NotBlank()
                 ],
-                'label' => Translator::getInstance()->trans('IDs Category antenna', [], RecommandationTransceiverAntenna::DOMAIN_NAME),
+                'label' => Translator::getInstance()->trans('ID Category antenna', [], RecommandationTransceiverAntenna::DOMAIN_NAME),
                 'label_attr' => [
                     'for' => 'Category-Recommandation-Antenna'
                 ],

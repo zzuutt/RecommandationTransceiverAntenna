@@ -1,12 +1,14 @@
-  {$productId = {product attr="id"}}
+  {assign var='array_category_transceiver' value=","|explode:{config key="Category_Recommandation_Transceiver"}}
+  {assign var='array_category_antenna' value=","|explode:{config key="Category_Recommandation_Antenna"}}
+
   {loop name="transceiver_or_antenna" type="category" product={product attr='id'}}
     {$typeProduct = ""}
     {$category_product_recommandation = 0}
-    {if $ID == {config key="Category_Recommandation_Transceiver"}}
+    {if $ID|in_array:$array_category_transceiver}
       {$typeProduct = "transceiver"}
       {$category_product_recommandation = {config key="Category_Recommandation_Antenna"}}
     {/if}
-    {if $ID == {config key="Category_Recommandation_Antenna"}}
+    {if $ID|in_array:$array_category_antenna}
       {$typeProduct = "antenna"}
       {$category_product_recommandation = {config key="Category_Recommandation_Transceiver"}}
     {/if}
