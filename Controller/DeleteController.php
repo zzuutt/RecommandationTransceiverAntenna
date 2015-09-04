@@ -63,12 +63,14 @@ class DeleteController extends BaseAdminController
             //Read config
             $category_transceiver = ConfigQuery::read("Category_Recommandation_Transceiver", "0");
             $category_antenna = ConfigQuery::read("Category_Recommandation_Antenna", "0");
+            $list_category_transceiver = explode(',',$category_transceiver);
+            $list_category_antenna = explode(',',$category_antenna);
 
             $listproduct = $vform->get('listproductDelete')->getviewData();
             $recommandationDelete = $vform->get('recommandationDelete')->getData();
 
 
-            if($category == $category_antenna){
+            if(in_array($category,$list_category_antenna)){
                 foreach($listproduct as $p){
                     RecommandationtransceiverantennaQuery::create()
                         ->filterByAntennaId($product_id)
@@ -77,7 +79,7 @@ class DeleteController extends BaseAdminController
                         ->delete();
                 }
             }
-            if($category == $category_transceiver){
+            if(in_array($category,$list_category_transceiver)){
                 foreach($listproduct as $p){
                     RecommandationtransceiverantennaQuery::create()
                         ->filterByAntennaId($p)

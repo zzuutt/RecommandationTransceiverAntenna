@@ -64,18 +64,20 @@ class ProductModificationFormDelete extends BaseForm
         //Read config
         $category_transceiver = ConfigQuery::read("Category_Recommandation_Transceiver", "0");
         $category_antenna = ConfigQuery::read("Category_Recommandation_Antenna", "0");
+        $list_category_transceiver = explode(',',ConfigQuery::read("Category_Recommandation_Transceiver", "0"));
+        $list_category_antenna = explode(',',ConfigQuery::read("Category_Recommandation_Antenna", "0"));
         
         //ID category to research and List recommendation for the current product
-        $category_search_product = $category_transceiver;
-        if($category_product == $category_transceiver) {
-          $category_search_product = $category_antenna;
-          $list_recommandationTransceiverAntenna = RecommandationtransceiverantennaQuery::Create()
+        $category_search_product = $list_category_transceiver;
+        if(in_array($category_product, $list_category_transceiver)) {
+            $category_search_product = $list_category_antenna;
+            $list_recommandationTransceiverAntenna = RecommandationtransceiverantennaQuery::Create()
                                                    ->filterByTransceiverId($productId)
                                                    ->find()
                                                    ;
         }
         else {
-          $list_recommandationTransceiverAntenna = RecommandationtransceiverantennaQuery::Create()
+            $list_recommandationTransceiverAntenna = RecommandationtransceiverantennaQuery::Create()
                                                    ->filterByAntennaId($productId)
                                                    ->find()
                                                    ;
@@ -83,14 +85,14 @@ class ProductModificationFormDelete extends BaseForm
     
         $recommandationList = array();
         foreach($list_recommandationTransceiverAntenna as $display_product) {
-          if($category_product == $category_transceiver) {
+            if(in_array($category_product, $list_category_transceiver)) {
               $title = ProductI18nQuery::Create()->findOneById($display_product->getAntennaId())->getTitle();
               $recommandationList[$display_product->getAntennaId()] = $title;
-          }
-          else {
+            }
+            else {
               $title = ProductI18nQuery::Create()->findOneById($display_product->getTransceiverId())->getTitle();
               $recommandationList[$display_product->getTransceiverId()] = $title;
-          }
+            }
         }
     
         $this->formBuilder
