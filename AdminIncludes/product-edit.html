@@ -1,7 +1,7 @@
   {assign var='array_category_transceiver' value=","|explode:{config key="Category_Recommandation_Transceiver"}}
   {assign var='array_category_antenna' value=","|explode:{config key="Category_Recommandation_Antenna"}}
 
-  {loop name="transceiver_or_antenna" type="category" product={product attr='id'}}
+  {loop name="transceiver_or_antenna" type="category" product={product attr='id'} limit='1'}
     {$typeProduct = ""}
     {$category_product_recommandation = 0}
     {if $ID|in_array:$array_category_transceiver}
